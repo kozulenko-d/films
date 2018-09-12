@@ -37,13 +37,12 @@ new Vue ({
 				return sum + (cur.quantity * cur.price);
 			}, 0);
 		}
-	},
-	beforeMount() {
-		console.log(2);
-		fetch('films.json').then(resp => {
-			return resp.json()
-		}).then(films => {
-			console.log(films);
-		})
+	// },
+	// beforeMount() {
+	// 	fetch('films.json').then(res => {
+	// 		return res.json()
+	// 	}).then(list => {
+	// 		this.films = list;
+	// 	})
 	}
 });
