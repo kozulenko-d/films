@@ -1,19 +1,246 @@
+$primeColor: #eee;
+$backgroundColor: midnightblue;
+$navColor: darkmagenta;
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Arial, sans-serif;
+	&:focus {
+		outline: none;
+	}
 }
-
+html, body {
+	height: 100%;
+}
 body {
-	color: #eee;
-	background-color: midnightblue;
+	display: flex;
+	flex-direction: column;
+	color: $primeColor;
+	background-color: $backgroundColor;
 }
-
+ul {
+	display: inline-block;
+}
+li {
+	list-style-type: none;
+	cursor: pointer;
+	margin: 4px;
+	&:hover {
+		color: lightpink;
+		text-decoration: underline;
+	}
+}
+header {
+	text-align: center;
+	margin-bottom: 24px;
+	position: relative;
+	span {
+		position: absolute;
+		cursor: pointer;
+		font-size: 24px;
+		text-transform: uppercase;
+		left: 0;
+		top: 34%;
+	}
+}
+main {
+	width: 80%;
+	flex: 1 0 auto;
+	margin: 0 auto;
+}
+footer {
+	flex-shrink: 0;
+	padding: 8px 10%;
+	background: navy;
+}
 h1 {
 	text-transform: capitalize;
 	margin: 24px 0;
 }
-.header-style {
+nav {
+	width: 100%;
+	background-color: $navColor;
+	padding: 8px;
+	position: relative;
+	span {
+		cursor: pointer;
+		display: inline-block;
+		padding: 4px 12px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+	}
+	.favPage {
+		//float: right
+		margin-left: 8px;
+	}
+	input {
+		position: absolute;
+		background-color: transparent;
+		right: 8px;
+		top: 8px;
+		bottom: 8px;
+		color: $primeColor;
+		padding: 4px 8px;
+		&::placeholder {
+			color: $primeColor;
+			opacity: .86;
+		}
+	}
+}
+.home-page, .film-page {
+	width: 74%;
+	display: inline-block;
+}
+.pagination {
 	text-align: center;
+	margin-bottom: 16px;
+	.pagination-wrapper {
+		display: inline-block;
+		position: relative;
+		.pagination-arrow {
+			position: relative;
+			top: 2px;
+			font-size: 32px;
+		}
+	}
+	span {
+		margin: 0 8px;
+		display: inline-block;
+		cursor: pointer;
+	}
+}
+.movies-container {
+	&::after {
+		display: block;
+		clear: both;
+		content: '';
+	}
+}
+.home-page {
+	.card {
+		width: 32%;
+		height: 500px;
+		float: left;
+		padding: 8px;
+		position: relative;
+		.picture {
+			display: block;
+			cursor: pointer;
+			img {
+				width: 90%;
+				display: block;
+				float: left;
+			}
+		}
+		p {
+			padding: 4px 0;
+		}
+		.favourite {
+			span {
+				position: absolute;
+				font-size: 24px;
+				right: 12px;
+				top: 4px;
+				color: gold;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+.film-page {
+	.card {
+		width: 90%;
+		height: 500px;
+		padding: 16px;
+		.picture {
+			float: left;
+			width: 50%;
+			img {
+				width: 90%;
+				display: block;
+				float: left;
+			}
+		}
+		.description-box {
+			width: 49%;
+			display: inline-block;
+		}
+		p, ul {
+			margin: 8px 4px;
+		}
+		.favourite {
+			position: relative;
+			span {
+				position: absolute;
+				font-size: 24px;
+				right: 12px;
+				top: -44px;
+				color: gold;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+		.relatives {
+			height: 200px;
+			.rel-card {
+				float: left;
+				margin: 8px;
+				width: 100px;
+				img {
+					width: 100%;
+				}
+				p {
+					margin-top: 4px;
+				}
+			}
+		}
+	}
+}
+aside {
+	padding-top: 8px;
+	float: right;
+	width: 24%;
+	height: 100px;
+	span {
+		font-size: 12px;
+		float: right;
+		padding: 8px;
+		margin: 4px;
+		border: 1px solid $primeColor;
+		border-radius: 16px;
+		&:hover {
+			background-color: $primeColor;
+			border-color: $backgroundColor;
+			color: $backgroundColor;
+			cursor: pointer;
+		}
+		&.highlighted {
+			background-color: goldenrod;
+			color: #111;
+			border-color: #111;
+		}
+	}
+}
+#searchField {
+	position: absolute;
+	font-size: 11px;
+	background: $navColor;
+	z-index: 100;
+	right: 8px;
+	top: 100%;
+	li {
+		padding: 8px;
+		width: 140px;
+		margin: 0;
+		border-bottom: 1px solid $navColor;
+		border-top: 1px solid $navColor;
+		&:hover {
+			border-color: #111;
+		}
+	}
 }
