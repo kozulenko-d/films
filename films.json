@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Matrix",
+		"genres": ["action", "thriller"],
+		"year": 1999,
+		"rating": 8.8,
+		"director": ["Wachowski, Wachowski"]
+	},
+	{
+		"name": "Schindler's list",
+		"genres": ["drama", "thriller"],
+		"year": 19,
+		"rating": 9.3,
+		"director": ["Steven Spielberg"]
+	},
+]
