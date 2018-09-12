@@ -40,9 +40,9 @@ new Vue ({
 	},
 	beforeMount() {
 		console.log(2);
-		let promise = fetch('films.json');
-		promise.then(resp => {
-			console.log(resp.json());
+		fetch('films.json').then(resp => {
+			let a = resp.text();
+			console.log(a);
 		})
 	}
 });
