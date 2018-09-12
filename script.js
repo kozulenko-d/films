@@ -41,7 +41,9 @@ new Vue ({
 	beforeMount() {
 		console.log(2);
 		fetch('films.json').then(resp => {
-			console.log(resp.json());
+			return resp.json()
+		}).then(films => {
+			console.log(films);
 		})
 	}
 });
