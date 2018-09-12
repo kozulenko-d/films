@@ -42,7 +42,7 @@ new Vue ({
 		console.log(2);
 		let promise = fetch('./films.json');
 		promise.then(resp => {
-			console.log(resp.data);
+			console.log(resp);
 		})
 	}
 });
