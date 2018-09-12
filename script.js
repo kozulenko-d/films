@@ -60,83 +60,6 @@ new Vue ({
 			this.goodAction = act;
 		},
 
-
-		editOne() {
-			this.goods[this.editingGood] = this.newGood;
-			this.newGood.available = +this.newGood.available;
-			this.newGood.price = +this.newGood.price;
-			this.newGood = {};
-			this.popup = false;
-			this.editingGood = null;
-		},
-		editGood(g, i) {
-			this.workGoods('edit');
-			this.editingGood = i;
-			this.newGood = this.goods[i];
-			this.popup = true;
-		},
-		deleteGood(i) {
-			this.goods.splice(i,1);
-		},
-		addGoodToCart(g, n) {
-			if (this.cart.some(f => f.code === g.code)) {
-				this.cart.forEach(e => {
-					if (e.code === g.code) {
-					e.quantity += n;
-					e.available -= n;
-				}
-			});
-			} else {
-				this.cart.push({
-					name: g.name,
-					quantity: n,
-					price: g.price,
-					code: g.code,
-					image: g.image,
-					available: (g.available - n)
-				});
-			}
-			this.goods.forEach(e => {
-				if (e.code === g.code) e.available = e.available - n;
-		});
-		},
-		handleCartGoods(c, i, operation) {
-			if (operation === 'add') {
-				c.available -= 1;
-				c.quantity += 1;
-				this.goods.forEach(e => {
-					if (e.code === c.code) e.available--;
-			});
-			} else if (operation === 'subtract') {
-				c.available += 1;
-				c.quantity -= 1;
-				this.goods.forEach(e => {
-					if (e.code === c.code) e.available++;
-			});
-			} else if (operation === 'remove') {
-				this.goods.forEach(e => {
-					if (e.code === c.code) e.available += c.quantity;
-			});
-				this.cart.splice(i, 1);
-			}
-		},
-		makeOrder() {
-			this.orders.push({
-				text: this.orderText,
-				name: this.orderName,
-				address: this.orderAddress,
-				phone: this.orderPhone,
-				goods: this.cart,
-				totalPrice: this.totalPrice
-			});
-			this.cart = [];
-			this.orderPhone = '';
-			this.orderAddress = '';
-			this.orderName = '';
-			this.orderText = '';
-			this.orderField = false;
-			this.showOrders = false;
-		},
 		sortMe(arr, k, boo = false) {
 			if (boo === true) {
 				arr.sort(function(a,b) {
@@ -155,7 +78,14 @@ new Vue ({
 		totalPrice() {
 			return this.cart.reduce((sum,cur) => {
 				return sum + (cur.quantity * cur.price);
-		}, 0);
+			}, 0);
 		}
+	},
+	beforeMount() {
+		console.log(2);
+		let promise = fetch('./films.json');
+		promise.then(resp => {
+			console.log(resp.data);
+		})
 	}
 });
