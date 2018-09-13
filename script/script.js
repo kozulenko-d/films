@@ -86,6 +86,8 @@ new Vue ({
 				let d = localStorage.getItem('favFilms').split(',');
 				this.favs = d.map(n => +n);
 			}
+
+			this.loadGenres();
 		}
 	},
 	computed: {
@@ -151,8 +153,5 @@ new Vue ({
 			this.films = list;
 		});
 		this.checkStorage();
-	},
-	mounted() {
-		this.loadGenres();
 	}
 });
