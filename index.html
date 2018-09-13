@@ -47,15 +47,15 @@
 								<div class="favourite">
 									<span
 											v-if="!favs.includes(m.id)"
-											@click.self="addFav(m.id)"
+											@click.stop="addFav(m.id)"
 											title="Add to favs"
 									>
 										&#9734;
 									</span>
 										<span
-												v-else-if="favs.includes(m.id)"
-												@click.self="removeFav(m.id)"
-												title="Remove from favs"
+											v-else-if="favs.includes(m.id)"
+											@click.stop="removeFav(m.id)"
+											title="Remove from favs"
 										>
 										&#9733;
 									</span>
@@ -98,14 +98,14 @@
 								<template>
 									<span
 											v-if="!favs.includes(singleFilmObj.id)"
-											@click.self="addFav(singleFilmObj.id)"
+											@click.stop="addFav(singleFilmObj.id)"
 											title="Add to favs"
 									>
 										&#9734;
 									</span>
 									<span
 											v-else-if="favs.includes(singleFilmObj.id)"
-											@click.self="removeFav(singleFilmObj.id)"
+											@click.stop="removeFav(singleFilmObj.id)"
 											title="Remove from favs"
 									>
 										&#9733;
