@@ -72,11 +72,12 @@ new Vue ({
 		},
 		loadGenres() {
 			let arr = this.films.map(m => m.genres);
+			console.log(arr);
 			let bunch = [];
 			arr.forEach(d => bunch.push(...d));
+			console.log(bunch);
 			this.genres = [...new Set(bunch)];
 		},
-
 		checkStorage() {
 			if (!localStorage.getItem('favFilms')){
 				localStorage.setItem('favFilms', '[]');
@@ -150,6 +151,8 @@ new Vue ({
 			this.films = list;
 		});
 		this.checkStorage();
+	},
+	mounted() {
 		this.loadGenres();
 	}
 });
