@@ -6,7 +6,7 @@
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
@@ -29,9 +29,9 @@
 					</template>
 					<span v-if="!showFavs" class="favPage" @click="showFavsFilms()">My favourite films</span>
 					<input
-							type="text"
-							v-model="searchMovie"
-							placeholder="Search"
+						type="text"
+						v-model="searchMovie"
+						placeholder="Search"
 					>
 					<ul v-if="searchMovie" id="searchField">
 						<li v-for="(s, i) in seekName" @click="singleMovie(s.id)">
@@ -44,6 +44,22 @@
 						<div v-for="(m, i) in sortedMovies" :key="i + m.name" class="card">
 							<div class="picture" @click="singleMovie(m.id)">
 								<img :src="m.img">
+								<div class="favourite">
+									<span
+											v-if="!favs.includes(m.id)"
+											@click="addFav(m.id)"
+											title="Add to favs"
+									>
+										&#9734;
+									</span>
+										<span
+												v-else-if="favs.includes(m.id)"
+												@click="removeFav(m.id)"
+												title="Remove from favs"
+										>
+										&#9733;
+									</span>
+								</div>
 							</div>
 							<div class="description-box">
 								<p class="film-title">Film: {{ m.name }}</p>
@@ -51,39 +67,26 @@
 								<p class="rating">Rating: {{ m.rating.toFixed(1) }}</p>
 								<ul class="genres">
 									Genres:
-									<li v-for="(g, j) in m.genres">
+									<li
+										v-for="(g, j) in m.genres"
+										@click="pickGenre(g)"
+									>
 										{{ g }}
 									</li>
 								</ul>
-							</div>
-							<div class="favourite">
-								<span
-									v-if="!favs.includes(m.id)"
-									@click="addFav(m.id)"
-									title="Add to favs"
-								>
-									&#9734;
-								</span>
-								<span
-									v-else-if="favs.includes(m.id)"
-									@click="removeFav(m.id)"
-									title="Remove from favs"
-								>
-									&#9733;
-								</span>
 							</div>
 						</div>
 					</div>
 					<div class="pagination" v-if="!popularMoviesOnly">
 						<div class="pagination-wrapper">
-							<span class="pagination-arrow" @click="portion = portion - 6">&larr;</span>
+							<span class="pagination-arrow" @click="pageArrow('left')">&larr;</span>
 							<span
 								v-for="(a, i) in Math.ceil(filteredMovies.length / 6)"
 								@click="portion = i * 6"
 							>
 								{{ i + 1 }}
 							</span>
-							<span class="pagination-arrow" @click="portion = portion + 6">&rarr;</span>
+							<span class="pagination-arrow" @click="pageArrow('right')">&rarr;</span>
 						</div>
 					</div>
 				</div>
@@ -91,6 +94,24 @@
 					<div class="card">
 						<div class="picture">
 							<img :src="singleFilmObj.img">
+							<div class="favourite">
+								<template>
+									<span
+											v-if="!favs.includes(singleFilmObj.id)"
+											@click="addFav(singleFilmObj.id)"
+											title="Add to favs"
+									>
+										&#9734;
+									</span>
+									<span
+											v-else-if="favs.includes(singleFilmObj.id)"
+											@click="removeFav(singleFilmObj.id)"
+											title="Remove from favs"
+									>
+										&#9733;
+									</span>
+								</template>
+							</div>
 						</div>
 						<div class="description-box">
 							<p class="film-title">Film: {{ singleFilmObj.name }}</p>
@@ -103,41 +124,28 @@
 								{{ g }}
 							</li>
 						</ul>
-
-						<div class="favourite">
-							<template>
-								<span
-									v-if="!favs.includes(singleFilmObj.id)"
-									@click="addFav(singleFilmObj.id)"
-									title="Add to favs"
-								>
-									&#9734;
-								</span>
-								<span
-									v-else-if="favs.includes(singleFilmObj.id)"
-									@click="removeFav(singleFilmObj.id)"
-									title="Remove from favs"
-								>
-									&#9733;
-								</span>
-							</template>
-						</div>
-
-						<div class="relatives">
+					</div>
+					<div class="relatives">
+						<p>Related films:</p>
+						<template v-if="relativeFilms">
 							<div class="rel-card"
-								v-for="(r, i) in relativeFilms"
+								 v-for="(r, i) in relativeFilms"
+								 @click="singleMovie(r.id)"
 							>
 								<img :src="r.img">
 								<p>{{ r.name }}</p>
 							</div>
-						</div>
+						</template>
+						<template v-else>
+							<span class="no-related">No related films unfortunately</span>
+						</template>
 					</div>
 				</div>
 				<aside>
 					<span
-							v-for="(g, i) in genres"
-							@click="pickGenre(g)"
-							:class="filterGenres.includes(g) ? 'highlighted' : ''"
+						v-for="(g, i) in genres"
+						@click="pickGenre(g)"
+						:class="filterGenres.includes(g) ? 'highlighted' : ''"
 					>
 						{{ g }}
 					</span>
@@ -146,8 +154,8 @@
 		</div>
 	</main>
 	<footer>
-		&copy;
+		<span>&copy;</span><a href="https://www.linkedin.com/in/kozulenkodmytro/" target="_blank">kozulenko_d</a>
 	</footer>
-	<script src="script.js"></script>
+	<script src="script/script.js"></script>
 </body>
 </html>
