@@ -71,11 +71,8 @@ new Vue ({
 			}
 		},
 		loadGenres() {
-			console.log(this.films);
 			let arr = this.films.map(m => m.genres);
 			let bunch = [];
-			console.log(arr);
-			console.log(bunch);
 			arr.forEach(d => bunch.push(...d));
 			this.genres = [...new Set(bunch)];
 		},
@@ -150,9 +147,7 @@ new Vue ({
 		fetch('films.json').then(res => {
 			return res.json()
 		}).then(list => {
-			console.log(this.films);
 			this.films = list;
-			console.log(this.films);
 			this.loadGenres();
 		});
 		this.checkStorage();
