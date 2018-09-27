@@ -155,5 +155,8 @@ new Vue ({
 			this.loadGenres()
 		);
 		this.checkStorage();
+	},
+	mounted() {
+		this.loadGenres();
 	}
 });
