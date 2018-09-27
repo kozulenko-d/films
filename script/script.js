@@ -73,6 +73,7 @@ new Vue ({
 		loadGenres() {
 			let arr = this.films.map(m => m.genres);
 			let bunch = [];
+			console.log(bunch);
 			arr.forEach(d => bunch.push(...d));
 			this.genres = [...new Set(bunch)];
 		},
