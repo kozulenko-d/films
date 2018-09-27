@@ -153,9 +153,8 @@ new Vue ({
 			console.log(this.films);
 			this.films = list;
 			console.log(this.films);
-		}).then(
-			this.loadGenres()
-		);
+			this.loadGenres();
+		});
 		this.checkStorage();
 	}
 });
