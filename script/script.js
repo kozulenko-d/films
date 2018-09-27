@@ -150,13 +150,12 @@ new Vue ({
 		fetch('films.json').then(res => {
 			return res.json()
 		}).then(list => {
+			console.log(this.films);
 			this.films = list;
+			console.log(this.films);
 		}).then(
 			this.loadGenres()
 		);
 		this.checkStorage();
-	},
-	mounted() {
-		this.loadGenres();
 	}
 });
