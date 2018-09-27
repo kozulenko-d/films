@@ -149,9 +149,8 @@ new Vue ({
 			return res.json()
 		}).then(list => {
 			this.films = list;
-		}).then(
-			this.loadGenres()
-		);
+		});
+		this.loadGenres();
 		this.checkStorage();
 	}
 });
